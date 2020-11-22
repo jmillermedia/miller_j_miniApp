@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MINI Model Breakdown</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script> 
+    <link rel="shortcut icon" href="images/favicon.png">
+    <!-- vue library linked in here. documentation at vuejs.org -->
+</head>
+<body>
+    <main id="app">
+        <img src="images/miniLogo.png" alt="MINI Company Logo">
+        <h1>{{ mainHeader }}</h1> <!-- vue binding @click-->
+        <p>{{anotherMessage}}</p>
+
+        <!-- show the prof data in the profs collection from main.js -->
+
+        <ul>
+            <li v-for="car in cars"> <!-- 'prof' is user defined -->
+                <p v-on:click="logClicked">{{car.Model}}, {{car.Price}}</p> 
+                <a href="" class="remove-car" @click.prevent="removecar(car)" :class="{ 'car-button-modifier' : removeAformat}">Show Info For {{car.Model}}</a> <!-- :href=""-->
+                <!-- @click.prevent is the same as using preventDefault in JS -->
+                <!-- ':class' is the shortform of 'v-bind:class' -->
+            </li>
+        </ul>
+
+        <section class="bio-data" :class="{'show-bio' : showBioData}">
+            <h1>{{ currentCarData.Model }}</h1>
+            <p>{{ currentCarData.Price}}</p>
+        </section>
+    </main>
+    <script src="js/main.js" type="module"></script>
+</body>
+</html>
