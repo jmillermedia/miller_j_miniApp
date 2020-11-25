@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MINI Model Breakdown</title>
+    <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/main.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script> 
     <link rel="shortcut icon" href="images/favicon.png">
@@ -11,24 +12,79 @@
 </head>
 <body>
     <main id="app">
-        <img src="images/miniLogo.png" alt="MINI Company Logo">
-        <h1>{{ mainHeader }}</h1> <!-- vue binding @click-->
-        <p>{{anotherMessage}}</p>
+        <header class="mainHeader">
+            <img src="images/miniLogo.png" alt="MINI Company Logo" class="mainLogo">
+            <h1 class="header1">{{ mainHeader }}</h1> 
+            <p class="header2">{{anotherMessage}}</p>
+        </header>
 
-        <!-- show the prof data in the profs collection from main.js -->
-
-        <ul>
-            <li v-for="car in cars"> <!-- 'prof' is user defined -->
-                <p v-on:click="logClicked">{{car.Model}}, {{car.Price}}</p> 
-                <a href="" class="remove-car" @click.prevent="removecar(car)" :class="{ 'car-button-modifier' : removeAformat}">Show Info For {{car.Model}}</a> <!-- :href=""-->
-                <!-- @click.prevent is the same as using preventDefault in JS -->
-                <!-- ':class' is the shortform of 'v-bind:class' -->
+        <div class="carSelect">
+        <ul class="carSelect__ul">
+            <li v-for="car in cars" class="carSelect__li">
+                <button @click="showCar(car)"><img :src="`images/${car.Photo2}`" alt="car button"><br>{{car.Model}}</button>
             </li>
         </ul>
+    </div>
 
-        <section class="bio-data" :class="{'show-bio' : showBioData}">
-            <h1>{{ currentCarData.Model }}</h1>
-            <p>{{ currentCarData.Price}}</p>
+        <section class="carData">
+            <div class="infoPanel">
+                <h1>Model: <span>{{ currentCarData.Model }}</span></h1>
+            </div>
+
+            <div class="infoPanel">
+                <p>Price: <span style="font-family: MiniSerif-Italic;">{{ currentCarData.Price }}</span></p>
+            </div>
+
+            <div class="infoPanel">
+                <p>Fuel Economy: {{ currentCarData.FuelEconomy}}</p>
+            </div>
+
+            <div class="photoPanel">
+            <img :src="'images/' + currentCarPhoto" alt="Car Picture" class="carPhoto">
+            </div>
+
+            <section class="carDataBottom">
+            <div class="infoPanel">
+                <p>Engine: <br class="breaks">{{ currentCarData.Engine}}</p>
+            </div>
+
+            <div class="infoPanel">
+                <p>Horsepower: <br class="breaks">{{ currentCarData.Horsepower}}</p>
+            </div>
+
+            <div class="infoPanel">
+                <p>Body Style: <br class="breaks">{{ currentCarData.BodyStyle}}</p>
+            </div>
+
+            <div class="infoPanel">
+                <p>Transmission: <br class="breaks">{{ currentCarData.Transmission}}</p>
+            </div>
+
+            <div class="infoPanel">
+                <p>Standard Seating: <br class="breaks">{{ currentCarData.StandardSeating}}</p>
+            </div>
+
+            <div class="infoPanel">
+                <p>Drivetrain: <br class="breaks">{{ currentCarData.Drivetrain}}</p>
+            </div>
+
+            <div class="infoPanel">
+                <p>Wheelbase: <br class="breaks">{{ currentCarData.Wheelbase}}</p>
+            </div>
+
+            <div class="infoPanel">
+                <p id="length">Length: <br class="breaks">{{currentCarData.Length}}</p>
+            </div>
+
+            <div class="infoPanel">
+                <p id="width">Width: <br class="breaks">{{ currentCarData.Width}}</p>
+            </div>
+
+            <div class="infoPanel">
+                <p id="height">Height: <br class="breaks">{{currentCarData.Height}}</p>
+            </div>
+
+            </section> <!-- carDataBottom closing tag -->
         </section>
     </main>
     <script src="js/main.js" type="module"></script>
